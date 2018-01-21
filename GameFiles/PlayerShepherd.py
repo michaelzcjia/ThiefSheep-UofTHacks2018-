@@ -56,6 +56,7 @@ class PlayerShepherd():
  #updated capture code
     def capture(self,sheepSwarm, plyrSheep):
 
+
         kDict = pg.key.get_pressed()
         if (kDict[pg.K_RSHIFT] != 0):
              if (self.capture_tokens > 0):  # Right now I have the capture tokens under the class definition, might have to put under player class
@@ -74,6 +75,7 @@ class PlayerShepherd():
                     y = sheep.sheepRect.y
                     xP = plyrSheep.plyrRect.x
                     yP = plyrSheep.plyrRect.y
+
                     if ((shepherd_x - 40) <= x <= (shepherd_x + 40) and (shepherd_y - 40) <= y <= (shepherd_y + 40)):
                         sheepSwarm.remove(sheep)
                         #sheep.sheep =  pg.transform.scale(sheep.sheep, (0, 0))
@@ -82,3 +84,4 @@ class PlayerShepherd():
                         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SHEPHERD WINS!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
                         plyrSheep.plyr =  pg.transform.scale(plyrSheep.plyr, (0, 0))
                         self.capture_tokens -= 1
+
