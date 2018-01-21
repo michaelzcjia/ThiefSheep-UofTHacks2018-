@@ -2,6 +2,7 @@ import sys, pygame
 from GameFiles import AutoSheep as char
 from GameFiles import PlayerSheep as pSheep
 from GameFiles import PlayerShepherd as pSheph
+from pygame import mixer
 
 pygame.init()
 
@@ -26,12 +27,20 @@ ling = char.autoSheep()
 plyrSheph = pSheph.PlayerShepherd()
 plyrSheep = pSheep.PlayerSheep()
 
+mixer.init()
+mixer.music.load('../Sounds/backgroundMusic2.mp3')
+mixer.music.play()
+
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
 
+
+
     count = 0
     for sheep in sheepSwarm:
+        if mixer.music.get_busy() == False: sys.exit()
         sheep.update()
 
         sheepPos = sheep.sheepRect
