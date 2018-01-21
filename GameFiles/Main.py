@@ -1,31 +1,36 @@
 import sys, pygame
-from GameFiles import Character as char
+from GameFiles import AutoSheep as char
+from GameFiles import PlayerSheep as pSheep
+from GameFiles import PlayerShepherd as pSheph
 
 pygame.init()
 
-size = width, height = 1000, 700
+size = width, height = 1500, 700
 screen = pygame.display.set_mode(size)
 
 black = 0, 0, 0
 green = 95, 142, 41
 
 # MAKE AUTOSHEEP SWARM
-numSheep = 60
+numSheep = 20
 sheepSwarm = []
 
 for sheep in range(numSheep):
     newSheep = char.autoSheep();
-    newSheep.sheep = pygame.transform.scale(newSheep.sheep,(100,100))
+    newSheep.sheep = pygame.transform.scale(newSheep.sheep,(80,80))
     sheepSwarm.append(newSheep)
 
 # sheep player tings
 
 ling = char.autoSheep()
+plyrSheph = pSheph.PlayerShepherd()
+plyrSheep = pSheep.PlayerSheep()
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
 
+    count = 0
     for sheep in sheepSwarm:
         sheep.update()
 
@@ -41,6 +46,19 @@ while True:
             #print(sheep.speed, sheep.sheepRect)  # personal check
 
         screen.blit(sheep.sheep, sheep.sheepRect)
+
+        if count == 0:
+            #Following code is for player as shepherd
+            shephRect = plyrSheph.plyrMove()
+            plyrSheph.update(shephRect)
+            screen.blit(plyrSheph.plyr,plyrSheph.plyrRect)
+            #Following code if for player as sheep
+            sheepRect = plyrSheep.plyrMove()
+            plyrSheep.update(sheepRect)
+            screen.blit(plyrSheep.plyr, plyrSheep.plyrRect)
+        count += 1
+
+
 
     pygame.display.flip()
     screen.fill(green)
