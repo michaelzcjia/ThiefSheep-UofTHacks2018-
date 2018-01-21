@@ -54,7 +54,8 @@ class PlayerShepherd():
         self.plyrRect = newPosition
 
  #updated capture code
-    def capture(self,sheepSwarm):
+    def capture(self,sheepSwarm, plyrSheep):
+
 
         kDict = pg.key.get_pressed()
         if (kDict[pg.K_RSHIFT] != 0):
@@ -72,7 +73,15 @@ class PlayerShepherd():
                 for sheep in sheepSwarm:
                     x = sheep.sheepRect.x
                     y = sheep.sheepRect.y
+                    xP = plyrSheep.plyrRect.x
+                    yP = plyrSheep.plyrRect.y
+
                     if ((shepherd_x - 40) <= x <= (shepherd_x + 40) and (shepherd_y - 40) <= y <= (shepherd_y + 40)):
                         sheepSwarm.remove(sheep)
                         #sheep.sheep =  pg.transform.scale(sheep.sheep, (0, 0))
                         self.capture_tokens -= 1
+                    if ((shepherd_x - 40) <= xP <= (shepherd_x + 40) and (shepherd_y - 40) <= yP <= (shepherd_y + 40)):
+                        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SHEPHERD WINS!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                        plyrSheep.plyr =  pg.transform.scale(plyrSheep.plyr, (0, 0))
+                        self.capture_tokens -= 1
+
