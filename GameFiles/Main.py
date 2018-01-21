@@ -58,7 +58,7 @@ while True:
             screen.blit(plyrSheep.plyr, plyrSheep.plyrRect)
         count += 1
 
-
+        plyrSheph.capture(sheepSwarm, plyrSheep)
 
     pygame.display.flip()
     screen.fill(green)
