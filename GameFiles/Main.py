@@ -2,6 +2,7 @@ import sys, pygame
 from GameFiles import AutoSheep as char
 from GameFiles import PlayerSheep as pSheep
 from GameFiles import PlayerShepherd as pSheph
+from pygame import mixer
 
 pygame.init()
 
@@ -12,7 +13,10 @@ clock = pygame.time.Clock()
 black = 0, 0, 0
 green = 95, 142, 41
 white = 255, 255, 255
+
+
 #INTRO
+
 def text_objects(text, font):
     textSurface = font.render(text, True, black)
     return textSurface, textSurface.get_rect()
@@ -64,7 +68,7 @@ def game_intro():
         clock.tick(5)
 
 # MAKE AUTOSHEEP SWARM
-numSheep = 20
+numSheep = 35
 sheepSwarm = []
 
 for sheep in range(numSheep):
@@ -74,12 +78,12 @@ for sheep in range(numSheep):
 
 # sheep player tings
 
-ling = char.autoSheep()
+# ling = char.autoSheep()
 plyrSheph = pSheph.PlayerShepherd()
 plyrSheep = pSheep.PlayerSheep()
 
-def end_game(winner):
 
+def end_game(winner):
 
 
 
@@ -108,16 +112,35 @@ def quitgame():
 
 def game_loop():
 
-    time = 75
+    mixer.init()
+    mixer.music.load('../Sounds/backgroundMusic2.mp3')
+    mixer.music.play()
+
+    iconShep = pygame.image.load("../Sprites/whiteshep2.png")
+    iconSheep = pygame.image.load("../Sprites/whitesheep.png")
+
+    plyrSheph.capture_tokens = 5
+    plyrSheph.win = False
+
+    # iconSheep = pygame.transform.scale(iconSheep, (80, 80))
+    # iconShep = pygame.transform.scale(iconShep, (80, 80))
+
+    #time = 75
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
 
         count = 0
         for sheep in sheepSwarm:
+
+            if mixer.music.get_busy() == False:
+                end_game('Sheep (time is up!)')
+
             sheep.update()
 
             sheepPos = sheep.sheepRect
+
+            screen.blit(sheep.sheep, sheep.sheepRect)
             #print(sheep.speed)
 
             if sheepPos.left < 0 or sheepPos.right > width:
@@ -128,7 +151,7 @@ def game_loop():
                 sheep.y_speed = -sheep.y_speed
                 #print(sheep.speed, sheep.sheepRect)  # personal check
 
-            screen.blit(sheep.sheep, sheep.sheepRect)
+            #screen.blit(sheep.sheep, sheep.sheepRect)
 
             if count == 0:
                 #Following code is for player as shepherd
@@ -144,10 +167,11 @@ def game_loop():
 
         #score update
         global shepScore, sScore
-        shepScore +=1
-        sScore +=  1
-        iconShep = pygame.image.load("../Sprites/whiteshep2.png")
-        iconSheep = pygame.image.load("../Sprites/whitesheep.png")
+        shepScore = 5 - plyrSheph.capture_tokens
+        sScore = plyrSheph.capture_tokens
+
+        #iconShep = pygame.image.load("../Sprites/whiteshep2.png")
+        #iconSheep = pygame.image.load("../Sprites/whitesheep.png")
 
         shepscoretext = myfont.render(":" + str(shepScore), 1, (255, 255, 255))
         sScoretext = myfont.render(":" + str(sScore), 1, (255, 255, 255))
@@ -161,15 +185,24 @@ def game_loop():
         screen.blit(shepscoretext, (width*0.02+90, 660))
         screen.blit(sScoretext,(width*0.83+70,660))
 
-        #timer
-        clock.tick(15)
-
 
         pygame.display.flip()
         screen.fill(green)
 
-        if sScore == 300:
+        if sScore == 10000:
             end_game("sheep")
+
+        if plyrSheph.win == True:
+            end_game('Shepherd')
+        elif plyrSheph.capture_tokens == 0 and plyrSheph.win == False:
+            end_game('Sheep')
+
+        # if plyrSheph.capture_tokens == 0:
+        #     if plyrSheph.win == True:
+        #         end_game('Shepherd')
+        #     else:
+        #         end_game('Sheep')
+
        # ling.update()  # sheep moves
        #
        #  ling_pos = ling.sheepRect  # sheep position
@@ -223,6 +256,7 @@ def game_loop():
     #     pygame.display.flip()
 
 game_intro()
-game_loop()
+
+#game_loop()
 
 

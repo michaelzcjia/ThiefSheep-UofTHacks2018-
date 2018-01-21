@@ -21,7 +21,7 @@ class autoSheep():
         self.speed = [self.x_speed, self.y_speed]
 
         self.sheepRect = self.sheep.get_rect()
-        self.sheepRect.x = random.randint(1, 1500)  # 500
+        self.sheepRect.x = random.randint(1, 1000)  # 500
         self.sheepRect.y = random.randint(1, 700)  # 350
 
     # function for sheep movement
