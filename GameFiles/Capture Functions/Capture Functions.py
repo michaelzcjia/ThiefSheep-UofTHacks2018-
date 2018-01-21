@@ -18,7 +18,7 @@ def capture(self):
             # Gets position of all sheep (including evil sheep)
             # and eliminates all sheep within the range of the shephard
 
-            for sheep in sheepSwarm:  # PlaceHolder
+            for sheep in sheepSwarm:
                 x = sheep.x
                 y = sheep.y
                 if ((shepherd_x - 40) <= x <= (shepherd_x + 40) and (shepherd_y - 40) >= y >= (shepherd_y + 40)):
