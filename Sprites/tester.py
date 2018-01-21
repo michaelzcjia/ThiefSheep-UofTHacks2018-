@@ -2,6 +2,7 @@ import sys, pygame
 pygame.init()
 
 size = width, height = 1800, 900
+
 speed1 = [2.5, 2]
 speed2 = [4, 4]
 speed3 = [6,3]
