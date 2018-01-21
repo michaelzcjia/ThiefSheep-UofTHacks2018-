@@ -15,7 +15,7 @@ class PlayerShepherd():
     speedUpRight = [2.0, -2.0]
     speedDownLeft = [-2.0, 2.0]
     speedDownRight = [2.0, 2.0]
-
+    capture_tokens = 5
 
     def __init__(self, imgURL = "../Sprites/shephard .png"):
         self.plyr = pg.image.load(imgURL)  # sheep.png, shepherd.png
@@ -52,3 +52,27 @@ class PlayerShepherd():
 
     def update(self, newPosition):
         self.plyrRect = newPosition
+
+ #updated capture code
+    def capture(self,sheepSwarm):
+
+        kDict = pg.key.get_pressed()
+        if (kDict[pg.K_RSHIFT] != 0):
+             if (self.capture_tokens > 0):  # Right now I have the capture tokens under the class definition, might have to put under player class
+
+                      # When rightshift key is pressed, activates capture function if token >0
+
+                      # Get current position of the Shephard, using placeholder image var
+                shepherd_x = self.plyrRect.x
+                shepherd_y = self.plyrRect.y
+
+                      # Gets position of all sheep (including evil sheep)
+                      # and eliminates all sheep within the range of the shephard
+
+                for sheep in sheepSwarm:
+                    x = sheep.sheepRect.x
+                    y = sheep.sheepRect.y
+                    if ((shepherd_x - 40) <= x <= (shepherd_x + 40) and (shepherd_y - 40) <= y <= (shepherd_y + 40)):
+                        sheepSwarm.remove(sheep)
+                        #sheep.sheep =  pg.transform.scale(sheep.sheep, (0, 0))
+                        self.capture_tokens -= 1
