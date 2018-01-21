@@ -1,4 +1,4 @@
-<font size="25"><b><h>Thief Sheep<h></b></font>
+# <font size="25"><b><h>Thief Sheep<h></b></font>
 
 Thief Sheep pits two people against each other in a high pressure, unrelenting, and unforgiving scenario. The shepherd (player 1) has family coming over in 1 minute and 30 seconds, and wants his guests to have the best experience possible. He needs to capture the thief sheep (player 2) before his guests arrive, to ensure the sheep doesn't wreak havok on his farm, or steal any of his or his families belongings. 
 
@@ -6,7 +6,7 @@ The first player plays as the shepherd, and the second plays as the thief sheep.
 
 To try the game out, run the Main.py.
 
-<b><h>Controls<h></b>
+### <b><h>Controls<h></b>
   
 Objective: Shepherd must capture thief sheep before the timer runs out (1:30 mins)
 
