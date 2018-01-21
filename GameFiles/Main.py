@@ -140,6 +140,7 @@ def game_loop():
                 plyrSheep.update(sheepRect)
                 screen.blit(plyrSheep.plyr, plyrSheep.plyrRect)
             count += 1
+            plyrSheph.capture(sheepSwarm, plyrSheep)
 
         #score update
         global shepScore, sScore
