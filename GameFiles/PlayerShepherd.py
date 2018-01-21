@@ -16,6 +16,7 @@ class PlayerShepherd():
     speedDownLeft = [-2.0, 2.0]
     speedDownRight = [2.0, 2.0]
     capture_tokens = 5
+    win = False;
 
     def __init__(self, imgURL = "../Sprites/shephard .png"):
         self.plyr = pg.image.load(imgURL)  # sheep.png, shepherd.png
@@ -82,6 +83,9 @@ class PlayerShepherd():
                         self.capture_tokens -= 1
                     if ((shepherd_x - 40) <= xP <= (shepherd_x + 40) and (shepherd_y - 40) <= yP <= (shepherd_y + 40)):
                         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SHEPHERD WINS!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-                        plyrSheep.plyr =  pg.transform.scale(plyrSheep.plyr, (0, 0))
+                        self.win = True;
+                        #plyrSheep.plyr =  pg.transform.scale(plyrSheep.plyr, (0, 0))
+                        plyrSheep.plyrRect.x = random.randint(0,1000)
+                        plyrSheep.plyrRect.y = random.randint(0,700)
                         self.capture_tokens -= 1
 
