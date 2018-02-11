@@ -6,12 +6,19 @@ import numpy as np
 #Purpose of this class is to add items to ThiefSheep. Still need to determine whether we should add all the different
 #items or just a repeat of this one
 
-class Item():
 
-    ItemRect = None
-
-    Item1 = pg.image.load("../Sprites/sheep.png")
+class item():
 
 
-    def __init__(self):
+    itemRect = None
+    itemImage = pg.image.load("../Sprites/appo.png") #only create the apple item for now
+
+
+    def __int__(self): #initializes coordinates of the item
+        self.itemRect = self.itemImage.get_rect()
+
+        #random positioning, adjust the following ranges if SCREENRES changes
+        self.itemRect.x = random.randint(1, 1000)
+        self.itemRect.y = random.randint(1, 700)
+
 

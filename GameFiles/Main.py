@@ -2,6 +2,7 @@ import sys, pygame
 from GameFiles import AutoSheep as char
 from GameFiles import PlayerSheep as pSheep
 from GameFiles import PlayerShepherd as pSheph
+from GameFiles import Item as it
 from pygame import mixer
 
 pygame.init()
@@ -76,6 +77,16 @@ for sheep in range(numSheep):
     newSheep.sheep = pygame.transform.scale(newSheep.sheep,(80,80))
     sheepSwarm.append(newSheep)
 
+#MAKE ITEMS
+
+numItem = 5
+itemSwarm = []
+
+for item in range(numItem):
+    newItem = it.item()
+    itemSwarm.append(newItem)
+
+
 # sheep player tings
 
 # ling = char.autoSheep()
@@ -125,16 +136,22 @@ def game_loop():
     # iconSheep = pygame.transform.scale(iconSheep, (80, 80))
     # iconShep = pygame.transform.scale(iconShep, (80, 80))
 
+
+
     #time = 75
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
 
         count = 0
+
         for sheep in sheepSwarm:
 
-            if mixer.music.get_busy() == False:
+            if mixer.music.get_busy() == False: #if the music stops playing, end the game
                 end_game('Sheep (time is up!)')
+
+            for item in itemSwarm:
+                screen.blit(item.itemImage, item.itemRect) #for some reason it's saying these are invalid coordinates
 
             sheep.update()
 
@@ -164,6 +181,8 @@ def game_loop():
                 screen.blit(plyrSheep.plyr, plyrSheep.plyrRect)
             count += 1
             plyrSheph.capture(sheepSwarm, plyrSheep)
+
+
 
         #score update
         global shepScore, sScore
